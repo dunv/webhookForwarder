@@ -1,0 +1,24 @@
+syntax = "proto3";
+package webhookForwarder;
+
+option go_package = "pb";
+
+message ListOfString {
+  repeated string entry = 1;
+}
+
+message SubscribeRequest {
+    string origin = 1;
+}
+
+message WebhookCall{
+  string origin = 1;
+  string method = 2;
+  string uri = 3;
+  map<string, ListOfString> headers = 4;
+  bytes body = 5;
+}
+
+service WebhookForwarder {
+  rpc Subscribe(SubscribeRequest) returns (stream WebhookCall);
+}
