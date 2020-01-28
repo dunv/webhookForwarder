@@ -106,7 +106,7 @@ var clientCmd = &cobra.Command{
 				}
 				res.Body.Close()
 
-				ulog.Infof("forwarded status: %s, body: %s", res.Status, strings.TrimSpace(string(resBody)))
+				ulog.Infof("forwarded destination: %s status: %s, body: %s", dest, res.Status, strings.TrimSpace(string(resBody)))
 			}
 		}
 	},
