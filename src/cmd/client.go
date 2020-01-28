@@ -45,6 +45,11 @@ var clientCmd = &cobra.Command{
 			return err
 		}
 
+		overridePath, err := cmd.Flags().GetString("overridePath")
+		if err != nil {
+			return err
+		}
+
 		for {
 		Connect:
 
@@ -78,6 +83,11 @@ var clientCmd = &cobra.Command{
 				}
 
 				dest := fmt.Sprintf("%s%s", outgoingURI, call.GetUri())
+
+				if overridePath != "" {
+					dest = fmt.Sprintf("%s/%s", outgoingURI, overridePath)
+				}
+
 				r, err := http.NewRequest(call.GetMethod(), dest, bytes.NewReader(call.GetBody()))
 				if err != nil {
 					ulog.Errorf("could not forward (%s)", err)
@@ -116,4 +126,5 @@ func init() {
 	rootCmd.AddCommand(clientCmd)
 	clientCmd.Flags().StringP("incomingSocket", "i", "0.0.0.0:50051", "grpc socket to connect to")
 	clientCmd.Flags().StringP("outgoingURI", "o", "http://0.0.0.0:8081", "socket to to forwarder webhook calls to")
+	clientCmd.Flags().StringP("overridePath", "p", "", "override webhook path (captured by server)")
 }
