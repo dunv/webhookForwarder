@@ -100,7 +100,7 @@ var serverCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(serverCmd)
-	serverCmd.Flags().StringP("incomingSocket", "g", "0.0.0.0:8080", "socket to listen on for webhook calls")
+	serverCmd.Flags().StringP("incomingSocket", "i", "0.0.0.0:8080", "socket to listen on for webhook calls")
 	serverCmd.Flags().StringP("incomingPath", "p", "/", "path to listen to for websocket calls")
 	serverCmd.Flags().StringP("outgoingSocket", "o", "0.0.0.0:50051", "socket to listen on for client-connections")
 }

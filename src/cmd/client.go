@@ -114,6 +114,6 @@ var clientCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(clientCmd)
-	clientCmd.Flags().StringP("incomingSocket", "g", "0.0.0.0:50051", "server socket")
+	clientCmd.Flags().StringP("incomingSocket", "i", "0.0.0.0:50051", "grpc socket to connect to")
 	clientCmd.Flags().StringP("outgoingURI", "o", "http://0.0.0.0:8081", "socket to to forwarder webhook calls to")
 }

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl --location --request POST 'http://localhost:8080/webhookCall' \
+curl --location --request POST "$1" \
 --header 'Content-Type: application/json' \
 --data-raw '{
 	"duration": 2000,

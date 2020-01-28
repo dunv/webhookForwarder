@@ -49,5 +49,5 @@ var dummyCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(dummyCmd)
-	dummyCmd.Flags().StringP("incomingSocket", "g", "0.0.0.0:8081", "server socket")
+	dummyCmd.Flags().StringP("incomingSocket", "i", "0.0.0.0:8081", "exposed socket for logging")
 }
