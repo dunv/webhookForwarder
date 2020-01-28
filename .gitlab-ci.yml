@@ -10,7 +10,7 @@ go_tests:
   script:
     - cd src
     - go test -race -coverprofile=coverage.txt -covermode=atomic -v ./...
-    - CODECOV_TOKEN="739ca5b5-30ef-4ee7-a54a-3bbb3338dd0e" bash <(curl -s https://codecov.io/bash)
+    - CODECOV_TOKEN="46542395-6385-436c-be4a-c609de9b1af0" bash <(curl -s https://codecov.io/bash)
 
 docker_branches:
   image: docker:latest
