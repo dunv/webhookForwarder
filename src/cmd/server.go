@@ -114,5 +114,5 @@ func init() {
 	serverCmd.Flags().StringP("incomingSocket", "i", "0.0.0.0:8080", "socket to listen on for webhook calls")
 	serverCmd.Flags().StringP("incomingPath", "p", "/", "path to listen to for websocket calls")
 	serverCmd.Flags().StringP("outgoingSocket", "o", "0.0.0.0:50051", "socket to listen on for client-connections")
-	serverCmd.Flags().BoolP("printHttpDump", "pd", false, "dump every webhook call to stdout")
+	serverCmd.Flags().BoolP("printHttpDump", "d", false, "dump every webhook call to stdout")
 }
