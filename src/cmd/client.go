@@ -84,6 +84,9 @@ var clientCmd = &cobra.Command{
 					continue
 				}
 
+				// reset default go-header
+				r.Header.Del("Accept-Encoding")
+
 				for k, v := range call.GetHeaders() {
 					for _, singleValue := range v.GetEntry() {
 						r.Header.Add(k, singleValue)

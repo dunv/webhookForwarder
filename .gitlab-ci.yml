@@ -1,0 +1,33 @@
+services:
+- docker:dind
+
+stages:
+  - test
+  - build_and_publish
+
+go_tests:
+  image: golang:1.13.6-stretch # need to use "full" linux here, so -race switch works (requires cgo, which does not work on alpine)
+  script:
+    - cd src
+    - go test -race -coverprofile=coverage.txt -covermode=atomic -v ./...
+    - CODECOV_TOKEN="739ca5b5-30ef-4ee7-a54a-3bbb3338dd0e" bash <(curl -s https://codecov.io/bash)
+
+docker_branches:
+  image: docker:latest
+  stage: build_and_publish
+  only:
+  - branches
+  script:
+  - docker build -t $CI_REGISTRY_IMAGE:latest .
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker push $CI_REGISTRY_IMAGE:latest
+
+docker_tags:
+  image: docker:latest
+  stage: build_and_publish
+  only:
+  - tags
+  script:
+  - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG .
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG%
